@@ -1,0 +1,29 @@
+<div class="to-do-list" role="main">
+  <div class="top">
+    <div class="container">
+      <h1 class="title">&#9998; todo list</h1>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-control">
+          <input type="text" class="form-input" placeholder="Type todos here" name="textInput" ngModel #todoTextField="ngModel">
+          <button type="submit" class="btn submit-btn" [disabled] = "!todoTextField.value"><span>&#10018; add</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="result">
+    <div class="container">
+      <div class="no-results" *ngIf="!todoList.length">
+        <p>All caught up ! &#9757; &#9757; &#9757;</p>
+      </div>
+      <ul class="listing" *ngIf="todoList.length">
+        <li class="item" *ngFor="let todo of todoList" [ngClass]="{completed: todo.completed}">
+          <div class="checkbox" (click)="onTodoClicked(todo)">
+            <span class="checkmark ">&#10003;</span>
+          </div>
+          <p class="text">{{todo.textInput}}</p>
+          <button type="button" class="btn close-btn" (click) = "removeTodo(todo)"><span>&#x2716;</span></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
